@@ -11,12 +11,12 @@ type Request = {
   seats: number;
 };
 
-type Response = void;
+//type Response = void; dummy n'a pas besoins d'alias
 
-export class ChangeSeats implements Executable<Request, Response> {
+export class ChangeSeats implements Executable<Request, void> {
   constructor(private readonly webinarRepository: IWebinarRepository) {}
 
-  async execute({ webinarId, user, seats }: Request): Promise<Response> {
+  async execute({ webinarId, user, seats }: Request): Promise<void> {
     const webinar = await this.webinarRepository.findById(webinarId);
     if (!webinar) {
       throw new WebinarNotFoundException();
@@ -33,7 +33,5 @@ export class ChangeSeats implements Executable<Request, Response> {
       throw new WebinarTooManySeatsException();
     }
     await this.webinarRepository.update(webinar);
-
-    return;
   }
 }
