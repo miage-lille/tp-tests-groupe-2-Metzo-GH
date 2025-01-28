@@ -67,7 +67,7 @@ describe('PrismaWebinarRepository', () => {
       const maybeWebinar = await prismaClient.webinar.findUnique({
         where: { id: 'webinar-id' },
       });
-      expect(maybeWebinar).toEqual(webinar);
+      expect(maybeWebinar).toEqual(webinar.props);
     });
   });
 
